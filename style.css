@@ -9,48 +9,183 @@ html {
 }
 
 body {
-    height: 100vh;
+    position: relative;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: radial-gradient(farthest-corner at 10px 10px, rgb(39, 123, 233) 0%, rgb(28, 86, 161) 20%, rgb(5, 83, 114) 70%);
+    /* background: radial-gradient(farthest-corner at 10px 10px, rgb(39, 123, 233) 0%, rgb(28, 86, 161) 20%, rgb(5, 83, 114) 70%); */
+    /* background: #333; */
+    /* background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,.5)); */
+    background-image: url('./images/bg/og_bg.jpg');
+    background-repeat: no-repeat;
+    background-position: right top;
+    background-size: cover;
     font-family: sans-serif;
     color: #fff;
     font-size: 2.4rem;
 }
 
-.location {
-    width: 60%;
+.app {
+    width: 100%;
+    max-width: 1000px;
+}
+
+.app__tip {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    width: 80%;
+    transform: translateX(-50%);
+    text-align: center;
+    color: #000;
+    border: 2px solid #000;
+    padding: 2rem;
+    background-color: rgba(146, 173, 24, 0.678);
+    transition: .2s;
+}
+
+.app__tip.js-hide {
+    transform: translateX(-50%) translateY(-200%);
+}
+
+.app__top {
+    width: 90%;
     height: 30vh;
     margin: 0 auto;
-    border: 1px solid red;
+    /* border: 1px solid red; */
     display: flex;
+    flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
 }
 
-.temperature {
-    width: 60%;
+.app__bottom {
+    width: 90%;
     margin: 0 auto;
-    height: 30vh;
-    border: 1px solid yellow;
+    padding: 2rem 0;
+    height: 25vh;
+    /* border: 1px solid yellow; */
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-}
-
-.temperature__degrees {
-    display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.temperature__symbol {
-    margin-left: 1rem;
+.app__bottom-tempContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin-bottom: 1rem;
 }
 
-.temperature__description {
+.app__bottom-tempSymbol {
+    /* margin-left: 1rem; */
+}
+
+.app__bottom-description {
     text-align: center;
+    margin-bottom: 1rem;
+}
+
+.app__bottom-arrow {
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    transform: translateY(0) rotate(0);
+    transition: transform .3s;
+}
+
+.app__bottom-arrow.js-opened {
+    transform: translateY(110%) rotate(180deg);
+}
+
+.app__bottom-arrow-item {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    margin-bottom: 2rem;
+    border-bottom: 4px solid #56a6e7;
+    border-right: 4px solid #56a6e7;
+    transform: rotate(45deg);
+    transition: .2s;
+}
+
+.app__bottom-arrow-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-top: 4px solid #56a6e7;
+    border-left: 4px solid #56a6e7;
+    transform: translate(10px, 10px) rotate(180deg);
+    transition: .2s;
+}
+
+.app__bottom-arrow-item:hover,
+.app__bottom-arrow-item:hover::before {
+    border-color: #acabab;
+}
+
+.app__drawer {
+    width: 100%;
+    margin: 0 auto;
+    padding: 3rem 0rem;
+    min-height: 18vh;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    /* border: 1px solid salmon; */
+    background-color: rgba(112, 112, 112, 0.1);
+    transform: scaleY(0);
+    transform-origin: 100% 0;
+    transition: .3s;
+}
+
+.app__drawer.js-shown {
+    transform: scaleY(1);
+}
+
+.app__drawer-item {
+    /* border: 1px solid green; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 60px;
+    height: 60px;
+    font-size: 1.1rem;
+    color: #56a6e7;
+}
+
+.app__drawer-icon {
+    width: 30px;
+}
+
+
+
+.spinner::before {
+    content: '';
+    box-sizing: border-box;
+    position: absolute;
+    top: calc(50% - 45px);
+    left: calc(50% - 45px);
+    height: 90px;
+    width: 90px;
+    border-radius: 50%;
+    border: 6px solid lightgrey;
+    border-top-color: #56a6e7;
+    border-bottom-color: #56a6e7;
+    animation: spin 0.8s ease infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
 }
