@@ -1,20 +1,20 @@
-const hintBox = document.querySelector('.hint');
-const errorBox = document.querySelector('.error');
-const appContainer = document.querySelector('.app');
-const appTop = document.querySelector('.app__top');
-const appBottom = document.querySelector('.app__bottom');
-const locationContainer = document.querySelector('.app__top-location');
-const iconContainer = document.querySelector('.app__top-icon');
-const descriptionContainer = document.querySelector('.app__bottom-description');
-const temperatureContainer = document.querySelector(
-  '.app__bottom-tempContainer'
+const hintBox = document.getElementById('hint');
+const errorBox = document.getElementById('error');
+const appContainer = document.getElementById('app');
+const appTop = document.getElementById('app-top');
+const appBottom = document.getElementById('app-bottom');
+const locationContainer = document.getElementById('app-top-location');
+const iconContainer = document.getElementById('app-top-icon');
+const descriptionContainer = document.getElementById('app-bottom-description');
+const temperatureContainer = document.getElementById(
+  'app-bottom-tempContainer'
 );
-const temperatureValueContainer = document.querySelector(
-  '.app__bottom-tempValue'
+const temperatureValueContainer = document.getElementById(
+  'app-bottom-tempValue'
 );
-const temperatureSymbol = document.querySelector('.app__bottom-tempSymbol');
-const arrow = document.querySelector('.app__bottom-arrow');
-const drawer = document.querySelector('.app__drawer');
+const temperatureSymbol = document.getElementById('app-bottom-tempSymbol');
+const arrow = document.getElementById('app-bottom-arrow');
+const drawer = document.getElementById('app-drawer');
 const cloudCoverValue = document.getElementById('cloudcover_value');
 const humidityValue = document.getElementById('humidity_value');
 const pressureValue = document.getElementById('pressure_value');
@@ -46,7 +46,6 @@ function getLocalWeather() {
       fetch(weatherApi)
         .then(res => res.json())
         .then(data => {
-          console.log(data);
           appContainer.classList.add('js-show');
           handleSpinner('hide');
           const timezone = data.timezone;

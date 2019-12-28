@@ -5,44 +5,59 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Simple Weather App</title>
-    <link rel="stylesheet" href="style.css" />
-    <script src="skycons.js" defer></script>
-    <script src="app.js" defer></script>
+    <link rel="stylesheet" href="./css/main.css" />
+    <script src="./scripts/skycons.js" defer></script>
+    <script src="./scripts/app.js" defer></script>
   </head>
   <body>
-    <div class="hint">
+    <div class="hint" id="hint">
       <p class="hint-content">
         You need to allow your browser use your location in order to get current
         weather for your place!
       </p>
     </div>
 
-    <div class="error">
+    <div class="error" id="error">
       <p class="error-content">
         Oups, something went wrong. Check your internet connection and make sure
         that you allowed your browser to use your geolocation!
       </p>
     </div>
-    <div class="app">
-      <div class="app__top">
-        <h2 class="app__top-location" title="location">Location</h2>
-        <canvas class="app__top-icon" width="128" height="128"></canvas>
+
+    <div class="app" id="app">
+      <div class="app__top" id="app-top">
+        <h2 class="app__top-location" id="app-top-location" title="location">
+          Location
+        </h2>
+        <canvas
+          class="app__top-icon"
+          id="app-top-icon"
+          width="128"
+          height="128"
+        ></canvas>
       </div>
 
-      <div class="app__bottom">
+      <div class="app__bottom" id="app-bottom">
         <div class="app__bottom-info">
-          <div class="app__bottom-tempContainer">
-            <span class="app__bottom-tempValue">2137</span>
-            <span>&deg;</span><span class="app__bottom-tempSymbol">C</span>
+          <div class="app__bottom-tempContainer" id="app-bottom-tempContainer">
+            <span class="app__bottom-tempValue" id="app-bottom-tempValue"
+              >2137</span
+            >
+            <span>&deg;</span
+            ><span class="app__bottom-tempSymbol" id="app-bottom-tempSymbol"
+              >C</span
+            >
           </div>
-          <div class="app__bottom-description">Description</div>
+          <div class="app__bottom-description" id="app-bottom-description">
+            Description
+          </div>
         </div>
-        <div class="app__bottom-arrow">
+        <div class="app__bottom-arrow" id="app-bottom-arrow">
           <span class="app__bottom-arrow-item"></span>
         </div>
       </div>
 
-      <div class="app__drawer">
+      <div class="app__drawer" id="app-drawer">
         <div class="app__drawer-details">
           <div class="app__drawer-detail">
             <img
