@@ -10,74 +10,96 @@
     <script src="app.js" defer></script>
   </head>
   <body>
+    <div class="hint">
+      <p class="hint-content">
+        You need to allow your browser use your location in order to get current
+        weather for your place!
+      </p>
+    </div>
+
+    <div class="error">
+      <p class="error-content">
+        Oups, something went wrong. Check your internet connection and make sure
+        that you allowed your browser to use your geolocation!
+      </p>
+    </div>
     <div class="app">
-      <div class="app__tip">
-        <p class="app__tip-content">
-          You need to allow your browser use your location in order to get
-          current weather for your place!
-        </p>
-      </div>
       <div class="app__top">
-        <h2 class="app__top-timezone" title="timezone">Timezone</h2>
+        <h2 class="app__top-location" title="location">Location</h2>
         <canvas class="app__top-icon" width="128" height="128"></canvas>
       </div>
 
       <div class="app__bottom">
-        <div class="app__bottom-tempContainer">
-          <span class="app__bottom-tempValue">2137</span>
-          <span>&deg;</span><span class="app__bottom-tempSymbol">C</span>
+        <div class="app__bottom-info">
+          <div class="app__bottom-tempContainer">
+            <span class="app__bottom-tempValue">2137</span>
+            <span>&deg;</span><span class="app__bottom-tempSymbol">C</span>
+          </div>
+          <div class="app__bottom-description">Description</div>
         </div>
-        <div class="app__bottom-description">Description</div>
         <div class="app__bottom-arrow">
           <span class="app__bottom-arrow-item"></span>
         </div>
       </div>
 
       <div class="app__drawer">
-        <div class="app__drawer-item">
-          <img
-            class="app__drawer-icon"
-            src="./images/icons/cloud.png"
-            alt="Cloud cover"
-            title="Cloud cover"
-          />
-          <span id="cloudcover_value">54</span>
+        <div class="app__drawer-details">
+          <div class="app__drawer-detail">
+            <img
+              class="app__drawer-icon"
+              src="./images/icons/cloud.png"
+              alt="Cloud cover"
+              title="Cloud cover"
+            />
+            <span id="cloudcover_value">54</span>
+          </div>
+          <div class="app__drawer-detail">
+            <img
+              class="app__drawer-icon"
+              src="./images/icons/humidity.png"
+              alt="Humidity"
+              title="Humidity"
+            />
+            <span id="humidity_value">34</span>
+          </div>
+          <div class="app__drawer-detail">
+            <img
+              class="app__drawer-icon"
+              src="./images/icons/pressure.png"
+              alt="Pressure"
+              title="Pressure"
+            />
+            <span id="pressure_value">242</span>
+          </div>
+          <div class="app__drawer-detail">
+            <img
+              class="app__drawer-icon"
+              src="./images/icons/thermomether.png"
+              alt="Feels-like temperature"
+              title="Feels-like temperature"
+            />
+            <span id="fl-temperature_value">323</span>
+          </div>
+          <div class="app__drawer-detail">
+            <img
+              class="app__drawer-icon"
+              src="./images/icons/wind.png"
+              alt="Wind"
+              title="Wind"
+            />
+            <span id="wind_value">323</span>
+          </div>
         </div>
-        <div class="app__drawer-item">
-          <img
-            class="app__drawer-icon"
-            src="./images/icons/humidity.png"
-            alt="Humidity"
-            title="Humidity"
-          />
-          <span id="humidity_value">34</span>
-        </div>
-        <div class="app__drawer-item">
-          <img
-            class="app__drawer-icon"
-            src="./images/icons/pressure.png"
-            alt="Pressure"
-            title="Pressure"
-          />
-          <span id="pressure_value">242</span>
-        </div>
-        <div class="app__drawer-item">
-          <img
-            class="app__drawer-icon"
-            src="./images/icons/thermomether.png"
-            alt="Feels-like temperature"
-            title="Feels-like temperature"
-          />
-          <span id="fl-temperature_value">323</span>
-        </div>
-        <div class="app__drawer-item">
-          <img
-            class="app__drawer-icon"
-            src="./images/icons/wind.png"
-            alt="Wind"
-            title="Wind"
-          />
-          <span id="wind_value">323</span>
+
+        <div class="app__drawer-forecast">
+          <div class="app__drawer-forecast-item"></div>
+          <div class="app__drawer-forecast-item"></div>
+          <div class="app__drawer-forecast-item"></div>
+          <div class="app__drawer-forecast-item"></div>
+          <div class="app__drawer-forecast-item"></div>
+          <div class="app__drawer-forecast-item"></div>
+          <div class="app__drawer-forecast-item"></div>
+          <div class="app__drawer-forecast-item"></div>
         </div>
       </div>
     </div>

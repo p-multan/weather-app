@@ -1,8 +1,9 @@
+const hintBox = document.querySelector('.hint');
+const errorBox = document.querySelector('.error');
 const appContainer = document.querySelector('.app');
-const appTip = document.querySelector('.app__tip');
 const appTop = document.querySelector('.app__top');
 const appBottom = document.querySelector('.app__bottom');
-const timezoneContainer = document.querySelector('.app__top-timezone');
+const locationContainer = document.querySelector('.app__top-location');
 const iconContainer = document.querySelector('.app__top-icon');
 const descriptionContainer = document.querySelector('.app__bottom-description');
 const temperatureContainer = document.querySelector(
@@ -20,6 +21,11 @@ const pressureValue = document.getElementById('pressure_value');
 const flTemperatureValue = document.getElementById('fl-temperature_value');
 const windValue = document.getElementById('wind_value');
 
+const weatherForecast = document.querySelector('.app__drawer-forecast');
+const weatherForecastItems = document.querySelectorAll(
+  '.app__drawer-forecast-item'
+);
+
 window.addEventListener('load', getLocalWeather);
 
 function getLocalWeather() {
@@ -34,12 +40,14 @@ function getLocalWeather() {
 
       // Some problem with the api, to use it we have to use proxy
       const proxy = `https://cors-anywhere.herokuapp.com/`;
-      const api = `${proxy}https://api.darksky.net/forecast/18013269f886ca9c1a015f535bdd9a40/${lat},${long}?units=si`;
+      const weatherApi = `${proxy}https://api.darksky.net/forecast/18013269f886ca9c1a015f535bdd9a40/${lat},${long}?units=si`;
+      const locationApi = `${proxy}https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${long}&localityLanguage=en`;
 
-      fetch(api)
+      fetch(weatherApi)
         .then(res => res.json())
         .then(data => {
           console.log(data);
+          appContainer.classList.add('js-show');
           handleSpinner('hide');
           const timezone = data.timezone;
           const {
@@ -52,27 +60,62 @@ function getLocalWeather() {
             windSpeed,
             cloudCover
           } = data.currently;
+          const weatherForecastData = data.daily.data;
 
-          timezoneContainer.textContent = timezone;
+          weatherForecastData.forEach((data, index) => {
+            const date = new Date(data.time * 1000).toLocaleString('en-us', {
+              day: '2-digit',
+              month: 'short',
+              weekday: 'short'
+            });
+
+            weatherForecastItems[index].innerHTML = `
+              <p class="app__drawer-forecast-item-date">${date}</p>
+              <canvas class="app__drawer-forecast-item-icon" width="45" height="45"></canvas>
+              <p class="app__drawer-forecast-item-temp">${Math.round(
+                data.temperatureMin
+              )}&deg;C - ${Math.round(data.temperatureMax)}&deg;C</p>
+            `;
+
+            const icon = weatherForecastItems[index].querySelector(
+              '.app__drawer-forecast-item-icon'
+            );
+
+            setIcon(data.icon, icon);
+          });
+
           temperatureValueContainer.textContent = Math.round(temperature);
           descriptionContainer.textContent = summary;
-          cloudCoverValue.textContent = cloudCover;
-          humidityValue.textContent = humidity;
+          cloudCoverValue.textContent = `${cloudCover * 100}%`;
+          humidityValue.textContent = `${humidity * 100}%`;
           pressureValue.textContent = `${pressure} hPa`;
           flTemperatureValue.textContent = `${apparentTemperature} \xB0C`;
           windValue.textContent = `${windSpeed} m/s`;
           setIcon(icon, iconContainer);
           setBackground(icon);
+
           temperatureContainer.addEventListener(
             'click',
             handleTemperatureConvertion.bind(null, temperature)
           );
           arrow.addEventListener('click', () => {
-            drawer.classList.toggle('js-shown');
-            arrow.classList.toggle('js-opened');
+            drawer.classList.toggle('js-show');
+            arrow.classList.toggle('js-open');
           });
         })
-        .catch(err => console.log(err));
+        .catch(err => {
+          showError();
+        });
+
+      fetch(locationApi)
+        .then(res => res.json())
+        .then(data => {
+          const { locality, countryName, continent } = data;
+          locationContainer.textContent = `${locality}, ${countryName}`;
+        })
+        .catch(err => {
+          showError();
+        });
     });
   }
 }
@@ -121,7 +164,7 @@ function setBackground(icon) {
       background = './images/bg/og_bg.jpg';
   }
 
-  document.body.style.backgroundImage = `url(${background})`;
+  document.body.style.background = `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(${background}) no-repeat center center/cover`;
 }
 
 function handleTemperatureConvertion(temperature) {
@@ -138,13 +181,22 @@ function handleTemperatureConvertion(temperature) {
 
 function handleSpinner(command) {
   if (command === 'show') {
-    appContainer.classList.add('spinner');
+    document.body.classList.add('spinner');
     appTop.style.display = 'none';
     appBottom.style.display = 'none';
   } else {
-    appContainer.classList.remove('spinner');
+    document.body.classList.remove('spinner');
     appTop.style.display = 'flex';
     appBottom.style.display = 'flex';
-    appTip.classList.add('js-hide');
+    hideHint();
   }
+}
+
+function showError() {
+  hideHint();
+  errorBox.classList.add('js-show');
+}
+
+function hideHint() {
+  hintBox.classList.add('js-hide');
 }
