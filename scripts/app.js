@@ -116,6 +116,8 @@ function getLocalWeather() {
           showError();
         });
     });
+  } else {
+    showError();
   }
 }
 
