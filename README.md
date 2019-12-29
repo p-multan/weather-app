@@ -1,5 +1,5 @@
 # weather-app
-Simple web application created using HTML5, SASS and Vanilla JS
+Simple web, mobile first application created using HTML5, SASS and Vanilla JS
 
 [Live preview](https://p-multan.github.io/weather-app/)
 
