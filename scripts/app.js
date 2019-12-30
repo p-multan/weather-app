@@ -68,13 +68,18 @@ function getLocalWeather() {
               weekday: 'short'
             });
 
-            weatherForecastItems[index].innerHTML = `
+            const itemContent = `
               <p class="app__drawer-forecast-item-date">${date}</p>
               <canvas class="app__drawer-forecast-item-icon" width="45" height="45"></canvas>
               <p class="app__drawer-forecast-item-temp">${Math.round(
                 data.temperatureMin
               )}&deg;C - ${Math.round(data.temperatureMax)}&deg;C</p>
             `;
+
+            weatherForecastItems[index].insertAdjacentHTML(
+              'afterbegin',
+              itemContent
+            );
 
             const icon = weatherForecastItems[index].querySelector(
               '.app__drawer-forecast-item-icon'
